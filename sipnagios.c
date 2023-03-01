@@ -251,7 +251,6 @@ static struct app
 	unsigned		 thread_count;
 	int			 sip_port;
 	int			 rtp_start_port;
-	pj_str_t		 auth_user;
 	pj_str_t		 local_addr;
 	pj_str_t		 local_uri;
 	pj_str_t		 local_contact;
@@ -1059,8 +1058,7 @@ static pj_status_t make_call(const pj_str_t *dst_uri)
 
 	cred[0].realm     = app.local_siprealm;
 	cred[0].scheme    = pj_str("digest");
-	/* Fall back to the local user if the Authorization is not set */
-	cred[0].username  = pj_strcmp2(app.auth_user, "@unset@") ? app.auth_user : app.local_user;
+	cred[0].username  = app.local_user;
 	cred[0].data_type = PJSIP_CRED_DATA_PLAIN_PASSWD;
 	cred[0].data      = app.local_password;
 
@@ -1271,7 +1269,6 @@ static pj_status_t init_options(int argc, char *argv[])
 		OPT_REPORT_FILE };
 
 	struct pj_getopt_option long_options[] = {
-		{ "auth-user",	    1, 0, 'a' },
 		//{ "count",	    1, 0, 'c' },
 		//{ "gap",            1, 0, 'g' },
 		//{ "call-report",    0, 0, 't' },
@@ -1360,7 +1357,6 @@ static pj_status_t init_options(int argc, char *argv[])
 	app.log_level = 1;
 	app.app_log_level = 1;
 	app.log_filename = NULL;
-	app.auth_user = pj_str("@unset@");
 	app.local_user = pj_str("alice");
 	app.local_password = pj_str("1234");
 	app.local_siprealm = pj_str("atlanta.example.com");
@@ -1422,9 +1418,6 @@ static pj_status_t init_options(int argc, char *argv[])
 					long_options, &option_index))!=-1) 
 	{
 		switch (c) {
-			case 'a':
-				app.auth_user = pj_str(pj_optarg);
-				break;
 			case 'c':
 				app.rxmosWARN = atof(pj_optarg);
 				break;
