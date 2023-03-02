@@ -89,7 +89,7 @@ static const char *USAGE =
 "   --local-user=USER,       -u    Set local SIP user (default: alice)\n"
 "   --local-password=PASSWD, -w    Set local SIP user password (default: 1234)\n"
 "   --local-siprealm=REALM,  -s    Set local SIP user SIP realm (default: atlanta.example.com)\n"
-"   --auth-user,             -a    Set distinct Authorization user. (default: value of local-user)\n"
+"   --auth-user=AUTHUSER,    -a    Set distinct Authorization user. (default: value of local-user)\n"
 "\n"
 " Logging Options:\n"
 "   --log-level=N,    -l    Set log verbosity level (default=1)\n"
