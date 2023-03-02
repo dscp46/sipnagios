@@ -1061,7 +1061,7 @@ static pj_status_t make_call(const pj_str_t *dst_uri)
 	cred[0].realm     = app.local_siprealm;
 	cred[0].scheme    = pj_str("digest");
 	/* Fall back to the local user if the Authorization is not set */
-	cred[0].username  = pj_strcmp2(app.auth_user, "@unset@") ? app.auth_user : app.local_user;
+	cred[0].username  = pj_strcmp2(app.auth_user, "") ? app.auth_user : app.local_user;
 	cred[0].data_type = PJSIP_CRED_DATA_PLAIN_PASSWD;
 	cred[0].data      = app.local_password;
 
@@ -1361,7 +1361,7 @@ static pj_status_t init_options(int argc, char *argv[])
 	app.log_level = 1;
 	app.app_log_level = 1;
 	app.log_filename = NULL;
-	app.auth_user = pj_str("@unset@");
+	app.auth_user = pj_str("");
 	app.local_user = pj_str("alice");
 	app.local_password = pj_str("1234");
 	app.local_siprealm = pj_str("atlanta.example.com");
