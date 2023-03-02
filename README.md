@@ -30,6 +30,7 @@ Zabbix seems not able to gather historical performances data from external check
    --local-user=USER,       -u    Set local SIP user (default: alice)
    --local-password=PASSWD, -w    Set local SIP user password (default: 1234)
    --local-siprealm=REALM,  -s    Set local SIP user SIP realm (default: atlanta.example.com)
+   --auth-user,             -a    Set distinct Authorization user. (default: value of local-user)
 
  Logging Options:
    --log-level=N,    -l    Set log verbosity level (default=1)
